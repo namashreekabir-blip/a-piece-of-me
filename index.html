@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💖</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        color: #333;
+        text-align: center;
+        overflow-x: hidden;
+    }
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: #ff0066;
+        text-shadow: 1px 1px 5px #fff;
+    }
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        color: #4a148c;
+    }
+    #gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        max-width: 900px;
+    }
+    #gallery img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    #gallery img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+    }
+    button {
+        margin-top: 30px;
+        background-color: #ff758c;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        color: white;
+        transition: 0.3s;
+    }
+    button:hover {
+        background-color: #ff4e68;
+    }
+
+    /* Hidden surprise section */
+    #blueCollection {
+        display: none;
+        margin-top: 50px;
+        animation: fadeIn 1s forwards;
+    }
+    #blueCollection h2 {
+        font-size: 2rem;
+        color: #007bff;
+        text-shadow: 1px 1px 10px #a6c1ee;
+        margin-bottom: 20px;
+    }
+    .blue-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+    .blue-gallery img {
+        width: 180px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .blue-gallery img:hover {
+        transform: scale(1.08) rotate(-1deg);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+    }
+    .caption {
+        color: #007bff;
+        font-size: 1rem;
+        margin-top: 10px;
+        font-weight: bold;
+        text-shadow: 1px 1px 3px #fff;
+    }
+    @keyframes fadeIn {
+        from {opacity:0;}
+        to {opacity:1;}
+    }
+</style>
+</head>
+<body>
+
+<h1>Hello Hello</h1>
+<p>Developer's Mind :)</p>
+
+<div id="gallery"></div>
+
+<button onclick="showBlueCollection()">Click for a Surprise ✨</button>
+
+<!-- Surprise section: Blue Collection -->
+<div id="blueCollection">
+    <h2>💙 My Blue Collection 💙</h2>
+    <p>Because every shade of blue tells a different story... 💫</p>
+    <div class="blue-gallery" id="blueGallery"></div>
+</div>
+
+<script>
+    // First gallery
+    const images = [
+        'just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg'
+    ];
+    images.sort(() => Math.random() - 0.5);
+    const gallery = document.getElementById('gallery');
+    images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = "For You";
+        gallery.appendChild(img);
+    });
+
+    // Blue Collection (Surprise)
+    const blueImages = [
+        'blue1.jpg','blue2.jpg','blue3.jpg','blue4.jpg','blue5.jpg'
+    ];
+
+    function showBlueCollection() {
+        const section = document.getElementById('blueCollection');
+        section.style.display = 'block';
+
+        const blueGallery = document.getElementById('blueGallery');
+        blueGallery.innerHTML = ''; // clear if reopened
+
+        blueImages.forEach((src, index) => {
+            const container = document.createElement('div');
+            container.style.textAlign = 'center';
+            
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = "Blue Collection";
+            
+            const caption = document.createElement('div');
+            caption.className = 'caption';
+            caption.textContent = "Blue Look " + (index + 1);
+
+            container.appendChild(img);
+            container.appendChild(caption);
+            blueGallery.appendChild(container);
+        });
+    }
+</script>
+
+</body>
+</html>
