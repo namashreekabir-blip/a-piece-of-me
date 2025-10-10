@@ -5,173 +5,201 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MayBe | MayBeNot</title>
 <style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(to right, #fbc2eb, #a6c1ee);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        margin: 0;
-        color: #333;
-        text-align: center;
-        overflow-x: hidden;
-    }
-    h1 {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-        color: #ff0066;
-        text-shadow: 1px 1px 5px #fff;
-    }
-    p {
-        font-size: 1.2rem;
-        margin-bottom: 30px;
-        color: #4a148c;
-    }
-    #gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        max-width: 900px;
-    }
-    #gallery img {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 15px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-    #gallery img:hover {
-        transform: scale(1.1);
-        box-shadow: 0 12px 25px rgba(0,0,0,0.5);
-    }
-    button {
-        margin-top: 30px;
-        background-color: #ff758c;
-        border: none;
-        padding: 12px 25px;
-        font-size: 1rem;
-        border-radius: 25px;
-        cursor: pointer;
-        color: white;
-        transition: 0.3s;
-    }
-    button:hover {
-        background-color: #ff4e68;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-    /* Hidden surprise section */
-    #blueCollection {
-        display: none;
-        margin-top: 50px;
-        animation: fadeIn 1s forwards;
-    }
-    #blueCollection h2 {
-        font-size: 2rem;
-        color: #007bff;
-        text-shadow: 1px 1px 10px #a6c1ee;
-        margin-bottom: 20px;
-    }
-    .blue-gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-    }
-    .blue-gallery img {
-        width: 180px;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 20px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        transition: transform 0.4s, box-shadow 0.4s;
-    }
-    .blue-gallery img:hover {
-        transform: scale(1.08) rotate(-1deg);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.6);
-    }
-    .caption {
-        color: #007bff;
-        font-size: 1rem;
-        margin-top: 10px;
-        font-weight: bold;
-        text-shadow: 1px 1px 3px #fff;
-    }
-    @keyframes fadeIn {
-        from {opacity:0;}
-        to {opacity:1;}
-    }
+/* Body and layout */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    color: #fff;
+    text-align: center;
+    background: linear-gradient(135deg, #fceabb, #f8b500);
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: backgroundShift 20s infinite alternate;
+}
+
+@keyframes backgroundShift {
+    0% {background: linear-gradient(135deg, #fceabb, #f8b500);}
+    50% {background: linear-gradient(135deg, #a1c4fd, #c2e9fb);}
+    100% {background: linear-gradient(135deg, #f5c7b8, #c9d6ff);}
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.2);
+}
+
+/* Today's Song */
+#todaysSong {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 25px;
+    padding: 25px 20px;
+    margin-bottom: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-width: 500px;
+    width: 90%;
+    animation: fadeIn 2s ease-in-out;
+}
+
+#todaysSong h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+/* YouTube Embed Styling */
+#ytPlayer {
+    border-radius: 20px;
+    width: 100%;
+    height: 280px;
+    border: 2px solid rgba(255,255,255,0.6);
+    box-shadow: 0 0 25px rgba(255,255,255,0.4);
+    animation: fadeIn 3s ease-in-out;
+    transition: box-shadow 0.5s ease;
+}
+
+#ytPlayer:hover {
+    box-shadow: 0 0 40px rgba(255,255,255,0.8);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Horizontal Slider */
+.slider-container {
+    width: 90%;
+    overflow-x: auto;
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    scroll-behavior: smooth;
+    border-radius: 25px;
+    margin-bottom: 60px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.slider-container::-webkit-scrollbar {
+    height: 8px;
+}
+.slider-container::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+}
+
+.slider-container img {
+    width: 200px; /* 4:5 ratio */
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.slider-container img:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+}
+
+/* Blue Collection Button */
+#showBlue {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: rgba(0, 195, 255, 0.5);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 30px;
+}
+#showBlue:hover {
+    background: rgba(0, 195, 255, 0.8);
+}
 </style>
 </head>
 <body>
 
-<h1>Hello Hello</h1>
-<p>Developer's Mind :)</p>
-<p>Welcome To My Art Gallery</p>
-<div id="gallery"></div>
+<h1>Welcome To My Magical Gallery ✨</h1>
+<p>Every color, every moment, a story to tell 💖</p>
 
-<button onclick="showBlueCollection()">Moments & Memories✨</button>
-
-<!-- Surprise section: Blue Collection -->
-<div id="blueCollection">
-    <h2>💙 My Blue Collection 💙</h2>
-    <p>Because every shade of blue tells a different story... 💫</p>
-    <div class="blue-gallery" id="blueGallery"></div>
+<!-- Today's Song -->
+<div id="todaysSong">
+    <h2>🎵 Today's Song: "Abhi Kuch Dino Se" 🎵</h2>
+    <!-- Embedded YouTube Video -->
+    <iframe id="ytPlayer"
+        src="https://www.youtube.com/embed/1pc60L6mBt0?autoplay=1&controls=1&loop=1&playlist=1pc60L6mBt0"
+        title="Abhi Kuch Dino Se - YouTube"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
 </div>
 
+<!-- Main Gallery Slider -->
+<div class="section-title">My Moments & Memories</div>
+<div class="slider-container" id="gallery"></div>
+
+<!-- Blue Collection -->
+<button id="showBlue" onclick="showBlueCollection()">💙 Show Blue Collection</button>
+<div class="section-title" id="blueTitle" style="display:none;">My Blue Collection 💙</div>
+    <p>Because every shade of blue tells a different story... 💫</p>
+<div class="slider-container" id="blueGallery" style="display:none;"></div>
+
 <script>
-    // First gallery
-    const images = [
-        'just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
-    images.sort(() => Math.random() - 0.5);
+    // Main gallery images
+    const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
     const gallery = document.getElementById('gallery');
     images.forEach(src => {
         const img = document.createElement('img');
         img.src = src;
-        img.alt = "For You";
         gallery.appendChild(img);
     });
 
-    // Blue Collection (Surprise)
-    const blueImages = [
-        'blue1.jpg','blue2.jpg','blue3.jpg','blue4.jpg','blue5.jpg'
-    ];
+    // Blue collection images
+    const blueImages = ['blue1.jpg','blue2.jpg','blue3.jpg','blue4.jpg','blue5.jpg'];
+    const blueGallery = document.getElementById('blueGallery');
+    const blueTitle = document.getElementById('blueTitle');
 
     function showBlueCollection() {
-        const section = document.getElementById('blueCollection');
-        section.style.display = 'block';
-
-        const blueGallery = document.getElementById('blueGallery');
-        blueGallery.innerHTML = ''; // clear if reopened
-
-        blueImages.forEach((src, index) => {
-            const container = document.createElement('div');
-            container.style.textAlign = 'center';
-            
+        blueGallery.style.display = 'flex';
+        blueTitle.style.display = 'block';
+        blueGallery.innerHTML = '';
+        blueImages.forEach(src => {
             const img = document.createElement('img');
             img.src = src;
-            img.alt = "Blue Collection";
-            
-            const caption = document.createElement('div');
-            caption.className = 'caption';
-            caption.textContent = "Blue Look " + (index + 1);
-
-            container.appendChild(img);
-            container.appendChild(caption);
-            blueGallery.appendChild(container);
+            blueGallery.appendChild(img);
         });
+        document.getElementById('showBlue').style.display = 'none';
     }
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
