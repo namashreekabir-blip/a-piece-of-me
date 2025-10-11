@@ -51,7 +51,12 @@ p {
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     max-width: 500px;
     width: 90%;
-    animation: fadeIn 2s ease-in-out;
+    animation: fadeIn 2s ease-in-out, glow 4s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+  to { box-shadow: 0 0 35px rgba(255,255,255,0.6); }
 }
 
 #todaysSong h2 {
@@ -152,11 +157,11 @@ p {
 
 <!-- Today's Song -->
 <div id="todaysSong">
-    <h2>🎵 Today's Song: "Ek din aap yun" 🎵</h2>
-    <!-- Embedded YouTube Video -->
+    <h2>🎵 Today's Song: "Ek Din Aap Yun" 🎵</h2>
+    <!-- Working YouTube Embed -->
     <iframe id="ytPlayer"
-        src="https://youtu.be/pFOeW4cC9tY?si=S5R4j0XzHQHkk3EV"
-        title="Ek din aap yun - YouTube"
+        src="https://www.youtube.com/embed/BXyXo-VMyng?autoplay=1&mute=0"
+        title="Ek Din Aap Yun - YouTube"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
@@ -170,7 +175,7 @@ p {
 <!-- Blue Collection -->
 <button id="showBlue" onclick="showBlueCollection()">💙 Show Blue Collection</button>
 <div class="section-title" id="blueTitle" style="display:none;">My Blue Collection 💙</div>
-    <p>Because every shade of blue tells a different story... 💫</p>
+<p id="blueDesc" style="display:none;">Because every shade of blue tells a different story... 💫</p>
 <div class="slider-container" id="blueGallery" style="display:none;"></div>
 
 <script>
@@ -187,10 +192,12 @@ p {
     const blueImages = ['blue1.jpg','blue2.jpg','blue3.jpg','blue4.jpg','blue5.jpg'];
     const blueGallery = document.getElementById('blueGallery');
     const blueTitle = document.getElementById('blueTitle');
+    const blueDesc = document.getElementById('blueDesc');
 
     function showBlueCollection() {
         blueGallery.style.display = 'flex';
         blueTitle.style.display = 'block';
+        blueDesc.style.display = 'block';
         blueGallery.innerHTML = '';
         blueImages.forEach(src => {
             const img = document.createElement('img');
@@ -203,5 +210,3 @@ p {
 
 </body>
 </html>
-
-
