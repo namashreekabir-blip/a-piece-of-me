@@ -7,7 +7,6 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-/* Body and layout */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -41,7 +40,6 @@ p {
     text-shadow: 1px 1px 8px rgba(0,0,0,0.2);
 }
 
-/* Today's Song */
 #todaysSong {
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(12px);
@@ -66,7 +64,6 @@ p {
     text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
 }
 
-/* YouTube Embed Styling */
 #ytPlayer {
     border-radius: 20px;
     width: 100%;
@@ -81,13 +78,11 @@ p {
     box-shadow: 0 0 40px rgba(255,255,255,0.8);
 }
 
-/* Fade-in animation */
 @keyframes fadeIn {
     from {opacity: 0; transform: translateY(20px);}
     to {opacity: 1; transform: translateY(0);}
 }
 
-/* Horizontal Slider */
 .slider-container {
     width: 90%;
     overflow-x: auto;
@@ -111,7 +106,7 @@ p {
 }
 
 .slider-container img {
-    width: 200px; /* 4:5 ratio */
+    width: 200px; 
     height: 250px;
     object-fit: cover;
     border-radius: 20px;
@@ -125,7 +120,6 @@ p {
     box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
 
-/* Section Titles */
 .section-title {
     font-size: 2rem;
     color: #fff;
@@ -133,7 +127,6 @@ p {
     text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
 }
 
-/* Blue Collection Button */
 #showBlue {
     padding: 12px 25px;
     border: none;
@@ -158,9 +151,9 @@ p {
 <!-- Today's Song -->
 <div id="todaysSong">
     <h2>🎵 Today's Song: "Ek Din Aap Yun" 🎵</h2>
-    <!-- Working YouTube Embed -->
+    <!-- Correct YouTube Embed -->
     <iframe id="ytPlayer"
-        src="https://youtu.be/-yvwawJ9u_M?si=qR2Ps2s2PmxYrXOl"
+        src="https://www.youtube.com/embed/-yvwawJ9u_M?autoplay=0&mute=0"
         title="Ek Din Aap Yun - YouTube"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -179,7 +172,6 @@ p {
 <div class="slider-container" id="blueGallery" style="display:none;"></div>
 
 <script>
-    // Main gallery images
     const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
     const gallery = document.getElementById('gallery');
     images.forEach(src => {
@@ -188,7 +180,6 @@ p {
         gallery.appendChild(img);
     });
 
-    // Blue collection images
     const blueImages = ['blue1.jpg','blue2.jpg','blue3.jpg','blue4.jpg','blue5.jpg'];
     const blueGallery = document.getElementById('blueGallery');
     const blueTitle = document.getElementById('blueTitle');
@@ -210,6 +201,3 @@ p {
 
 </body>
 </html>
-
-
-
