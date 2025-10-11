@@ -74,7 +74,6 @@ p { font-size: 1.2rem; margin-bottom: 40px; text-shadow: 1px 1px 8px rgba(0,0,0,
 #showBlue { padding: 12px 25px; border: none; border-radius: 25px; background: rgba(0, 195, 255, 0.5); color: #fff; font-size: 1rem; cursor: pointer; transition: 0.3s; margin-bottom: 30px; }
 #showBlue:hover { background: rgba(0, 195, 255, 0.8); }
 
-/* Notes Section */
 .note-section {
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(12px);
@@ -99,13 +98,17 @@ button.save-btn:hover { background-color: rgba(255,255,255,0.6); color: #333;}
 }
 .note button.delete-btn:hover { background: #ff1a1a; }
 </style>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
 </head>
 <body>
 
 <h1>Welcome To My Magical World ✨</h1>
 <p>Every color, every moment, a story to tell 💖</p>
 
-<!-- Today's Song -->
 <div id="todaysSong">
     <h2>🎵 Today's Song: "Ek Din Aap Yun" 🎵</h2>
     <iframe id="ytPlayer"
@@ -117,7 +120,6 @@ button.save-btn:hover { background-color: rgba(255,255,255,0.6); color: #333;}
     </iframe>
 </div>
 
-<!-- Notes Section -->
 <section class="note-section">
     <h2>💌 Things to Tell Each Other 💌</h2>
     <div id="currentDate"></div>
@@ -126,11 +128,9 @@ button.save-btn:hover { background-color: rgba(255,255,255,0.6); color: #333;}
     <div class="notes-list" id="notesList"></div>
 </section>
 
-<!-- Main Gallery Slider -->
 <div class="section-title">My Moments & Memories</div>
 <div class="slider-container" id="gallery"></div>
 
-<!-- Blue Collection -->
 <button id="showBlue" onclick="showBlueCollection()">💙 Show Blue Collection</button>
 <div class="section-title" id="blueTitle" style="display:none;">My Blue Collection 💙</div>
 <p id="blueDesc" style="display:none;">Because every shade of blue tells a different story... 💫</p>
@@ -139,83 +139,28 @@ button.save-btn:hover { background-color: rgba(255,255,255,0.6); color: #333;}
 <script>
 const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
 const gallery = document.getElementById('gallery');
-images.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    gallery.appendChild(img);
-});
+images.forEach(src => { const img = document.createElement('img'); img.src = src; gallery.appendChild(img); });
 
 const blueImages = ['b1.jpg','b7.jpg','b2.jpg','b4.jpg','b6.jpg','b11.jgp','b8.jpg','b3.jpg','b11.jpg','b10.jpg','bb.jpg'];
 const blueGallery = document.getElementById('blueGallery');
 const blueTitle = document.getElementById('blueTitle');
 const blueDesc = document.getElementById('blueDesc');
-
 function showBlueCollection() {
     blueGallery.style.display = 'flex';
     blueTitle.style.display = 'block';
     blueDesc.style.display = 'block';
     blueGallery.innerHTML = '';
-    blueImages.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        blueGallery.appendChild(img);
-    });
+    blueImages.forEach(src => { const img = document.createElement('img'); img.src = src; blueGallery.appendChild(img); });
     document.getElementById('showBlue').style.display = 'none';
 }
 
-// Notes Section
+// 🔹 Notes Section with Firebase
 document.getElementById("currentDate").innerText = "🗓️ " + new Date().toDateString();
 
-function loadNotes() {
-    const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
-    const list = document.getElementById("notesList");
-    list.innerHTML = "";
-    notes.forEach((n, index) => {
-        const div = document.createElement("div");
-        div.className = "note";
-        div.innerHTML = `
-            <p>${n.text}</p>
-            <div class="date">${n.date}</div>
-            <button class="delete-btn" onclick="deleteNote(${index})">Delete</button>
-        `;
-        list.appendChild(div);
-    });
-}
-
-function saveNote() {
-    const text = document.getElementById("noteInput").value;
-    if (!text.trim()) return;
-    const note = { text, date: new Date().toLocaleString() };
-    const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
-    notes.push(note);
-    localStorage.setItem("sharedNotes", JSON.stringify(notes));
-    document.getElementById("noteInput").value = "";
-    loadNotes();
-}
-
-function deleteNote(index) {
-    const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
-    notes.splice(index, 1);
-    localStorage.setItem("sharedNotes", JSON.stringify(notes));
-    loadNotes();
-}
-
-loadNotes();
-</script>
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Replace with your Firebase config
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com
