@@ -1,154 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MayBe | MayBeNot</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MayBe | MayBeNot</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    color: #fff;
-    text-align: center;
-    background: linear-gradient(135deg, #fceabb, #f8b500);
-    min-height: 100vh;
-    overflow-x: hidden;
-    padding: 50px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: backgroundShift 20s infinite alternate;
-}
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      color: #fff;
+      text-align: center;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 50px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: backgroundShift 20s infinite alternate;
+    }
 
-@keyframes backgroundShift {
-    0% {background: linear-gradient(135deg, #fceabb, #f8b500);}
-    50% {background: linear-gradient(135deg, #a1c4fd, #c2e9fb);}
-    100% {background: linear-gradient(135deg, #f5c7b8, #c9d6ff);}
-}
+    @keyframes backgroundShift {
+      0% {background: linear-gradient(135deg, #fceabb, #f8b500);}
+      50% {background: linear-gradient(135deg, #a1c4fd, #c2e9fb);}
+      100% {background: linear-gradient(135deg, #f5c7b8, #c9d6ff);}
+    }
 
-h1 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 15px rgba(0,0,0,0.3);}
-p { font-size: 1.2rem; margin-bottom: 40px; text-shadow: 1px 1px 8px rgba(0,0,0,0.2); }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+    }
 
-#todaysSong {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(12px);
-    border-radius: 25px;
-    padding: 25px 20px;
-    margin-bottom: 50px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    max-width: 500px;
-    width: 90%;
-    animation: fadeIn 2s ease-in-out, glow 4s infinite alternate;
-}
-@keyframes glow { from { box-shadow: 0 0 15px rgba(255,255,255,0.2); } to { box-shadow: 0 0 35px rgba(255,255,255,0.6); } }
-#todaysSong h2 { font-size: 1.6rem; margin-bottom: 20px; color: #fff; text-shadow: 1px 1px 5px rgba(0,0,0,0.2);}
-#ytPlayer { border-radius: 20px; width: 100%; height: 280px; border: 2px solid rgba(255,255,255,0.6); box-shadow: 0 0 25px rgba(255,255,255,0.4); animation: fadeIn 3s ease-in-out; transition: box-shadow 0.5s ease;}
-#ytPlayer:hover { box-shadow: 0 0 40px rgba(255,255,255,0.8); }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      text-shadow: 1px 1px 8px rgba(0,0,0,0.2);
+    }
 
-@keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
+    #todaysSong {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 25px;
+      padding: 25px 20px;
+      margin-bottom: 50px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 500px;
+      width: 90%;
+      animation: fadeIn 2s ease-in-out, glow 4s infinite alternate;
+    }
 
-.section-title { font-size: 2rem; color: #fff; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.3);}
-#showBlue { padding: 12px 25px; border: none; border-radius: 25px; background: rgba(0, 195, 255, 0.5); color: #fff; font-size: 1rem; cursor: pointer; transition: 0.3s; margin-bottom: 30px; }
-#showBlue:hover { background: rgba(0, 195, 255, 0.8); }
+    @keyframes glow {
+      from { box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+      to { box-shadow: 0 0 35px rgba(255,255,255,0.6); }
+    }
 
-/* Notes Section */
-.note-section {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(12px);
-    border-radius: 25px;
-    padding: 30px 25px;
-    margin-bottom: 50px;
-    width: 90%;
-    max-width: 600px;
-    color: #fff;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-.note-section h2 { font-size: 1.8rem; margin-bottom: 15px;}
-#currentDate { font-size: 0.9rem; color: #f7e8d4; margin-bottom: 15px;}
-textarea { width: 100%; height: 100px; border-radius: 15px; border: none; padding: 10px; resize: none; font-size: 1rem; outline: none; color: #333;}
-button.save-btn { background-color: rgba(255,255,255,0.3); border: none; color: white; border-radius: 20px; padding: 10px 25px; margin-top: 10px; cursor: pointer; font-weight: bold; transition: background 0.3s ease; }
-button.save-btn:hover { background-color: rgba(255,255,255,0.6); color: #333;}
-.notes-list { margin-top: 20px; background: rgba(255,255,255,0.1); border-radius: 15px; padding: 15px; text-align: left; max-height: 250px; overflow-y: auto; }
-.note { background: rgba(255,255,255,0.3); padding: 10px; border-radius: 12px; margin-bottom: 10px; position: relative; }
-.note .date { text-align: right; font-size: 0.8rem; color: #f9e4d4; margin-top: 5px;}
-.note button.delete-btn {
-    position: absolute; top: 8px; right: 8px; background: #ff4d4d; border: none; color: white; padding: 3px 8px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;
-}
-.note button.delete-btn:hover { background: #ff1a1a; }
-</style>
+    #todaysSong h2 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    }
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    #ytPlayer {
+      border-radius: 20px;
+      width: 100%;
+      height: 280px;
+      border: 2px solid rgba(255,255,255,0.6);
+      box-shadow: 0 0 25px rgba(255,255,255,0.4);
+      animation: fadeIn 3s ease-in-out;
+      transition: box-shadow 0.5s ease;
+    }
 
+    #ytPlayer:hover {
+      box-shadow: 0 0 40px rgba(255,255,255,0.8);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .slider-container {
+      width: 90%;
+      overflow-x: auto;
+      display: flex;
+      gap: 20px;
+      padding: 20px 0;
+      scroll-behavior: smooth;
+      border-radius: 25px;
+      margin-bottom: 60px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .slider-container::-webkit-scrollbar { height: 8px; }
+    .slider-container::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+    }
+
+    .slider-container img {
+      width: 200px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .slider-container img:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+
+    #showBlue {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: rgba(0, 195, 255, 0.5);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-bottom: 30px;
+    }
+
+    #showBlue:hover {
+      background: rgba(0, 195, 255, 0.8);
+    }
+
+    /* Notes Section */
+    .note-section {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 25px;
+      padding: 30px 25px;
+      margin-bottom: 50px;
+      width: 90%;
+      max-width: 600px;
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .note-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    #currentDate {
+      font-size: 0.9rem;
+      color: #f7e8d4;
+      margin-bottom: 15px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      border-radius: 15px;
+      border: none;
+      padding: 10px;
+      resize: none;
+      font-size: 1rem;
+      outline: none;
+      color: #333;
+    }
+
+    button.save-btn {
+      background-color: rgba(255,255,255,0.3);
+      border: none;
+      color: white;
+      border-radius: 20px;
+      padding: 10px 25px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    button.save-btn:hover {
+      background-color: rgba(255,255,255,0.6);
+      color: #333;
+    }
+
+    .notes-list {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 15px;
+      text-align: left;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .note {
+      background: rgba(255,255,255,0.3);
+      padding: 10px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .note .date {
+      text-align: right;
+      font-size: 0.8rem;
+      color: #f9e4d4;
+      margin-top: 5px;
+    }
+
+    .note button.delete-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .note button.delete-btn:hover {
+      background: #ff1a1a;
+    }
+  </style>
 </head>
 <body>
+  <h1>Welcome To My Magical Gallery ✨</h1>
+  <p>Every color, every moment, a story to tell 💖</p>
 
-<h1>Welcome To My Magical Gallery ✨</h1>
-<p>Every color, every moment, a story to tell 💖</p>
-
-<!-- Today's Song -->
-<div id="todaysSong">
-    <h2>🎵 Today's Song: "TU MILA TO HAINA" 🎵</h2>
+  <!-- Today's Song -->
+  <div id="todaysSong">
+    <h2>🎵 Today's Song: "Tu Mila To Haina" 🎵</h2>
     <iframe id="ytPlayer"
-        src="https://www.youtube.com/embed/m2jSsuNUiJ8"
-        title="Ek Din Aap Yun - YouTube"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
+      src="https://www.youtube.com/embed/m2jSsuNUiJ8"
+      title="Tu Mila To Haina - YouTube"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
     </iframe>
-</div>
+  </div>
 
-<!-- Notes Section -->
-<section class="note-section">
+  <!-- Notes Section -->
+  <section class="note-section">
     <h2>💌 Things to Tell Each Other 💌</h2>
     <div id="currentDate"></div>
     <textarea id="noteInput" placeholder="Write something sweet... 💭"></textarea>
     <button class="save-btn" onclick="saveNote()">Save Note</button>
     <div class="notes-list" id="notesList"></div>
-</section>
+  </section>
 
-<!-- Main Gallery Slider -->
-<div class="section-title">My Moments & Memories</div>
-<div class="slider-container" id="gallery"></div>
+  <!-- Main Gallery Slider -->
+  <div class="section-title">My Moments & Memories</div>
+  <div class="slider-container" id="gallery"></div>
 
-<!-- Blue Collection -->
-<button id="showBlue" onclick="showBlueCollection()">💙 Show Collection</button>
-<div class="section-title" id="blueTitle" style="display:none;">Things That Idiot Should Know💙</div>
-<p id="blueDesc" style="display:none;">Because even silly things deserve to be remembered beautifully🌷💫</p>
-<div class="slider-container" id="blueGallery" style="display:none;"></div>
+  <!-- Blue Collection -->
+  <button id="showBlue" onclick="showBlueCollection()">💙</button>
+  <div class="section-title" id="blueTitle" style="display:none;">Things That Idiot Should Know💙</div>
+  <p id="blueDesc" style="display:none;">Because even silly things deserve to be remembered beautifully🌷💫</p>
+  <div class="slider-container" id="blueGallery" style="display:none;"></div>
 
-<script>
-// Firebase config (replace with your own Firebase project details)
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+  <script>
+    const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
+    const gallery = document.getElementById('gallery');
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      gallery.appendChild(img);
+    });
 
-// Date
-document.getElementById("currentDate").innerText = "🗓️ " + new Date().toDateString();
+    const blueImages = ['bajari.jpeg','chapti.avif','jwar.jpeg','book.jpg'];
+    const blueGallery = document.getElementById('blueGallery');
+    const blueTitle = document.getElementById('blueTitle');
+    const blueDesc = document.getElementById('blueDesc');
 
-// Gallery
-const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
-const gallery = document.getElementById('gallery');
-images.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    gallery.appendChild(img);
-});
+    function showBlueCollection() {
+      blueGallery.style.display = 'flex';
+      blueTitle.style.display = 'block';
+      blueDesc.style.display = 'block';
+      blueGallery.innerHTML = '';
+      blueImages.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        blueGallery.appendChild(img);
+      });
+      document.getElementById('showBlue').style.display = 'none';
+    }
 
-// Blue collection
-const blueImages = ['bajari.jpeg','chapti.avif','jwar.jpeg','book.jpg'];
-const blueGallery = document.getElementById('blueGallery');
-const blueTitle = document.getElementById('blue
+    // Notes Section
+    document.getElementById("currentDate").innerText = "🗓️ " + new Date().toDateString();
 
+    function loadNotes() {
+      const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
+      const list = document.getElementById("notesList");
+      list.innerHTML = "";
+      notes.forEach((n, index) => {
+        const div = document.createElement("div");
+        div.className = "note";
+        div.innerHTML = `<p>${n.text}</p>
+                         <div class="date">${n.date}</div>
+                         <button class="delete-btn" onclick="deleteNote(${index})">Delete</button>`;
+        list.appendChild(div);
+      });
+    }
 
+    function saveNote() {
+      const text = document.getElementById("noteInput").value;
+      if (!text.trim()) return;
+      const note = { text, date: new Date().toLocaleString() };
+      const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
+      notes.push(note);
+      localStorage.setItem("sharedNotes", JSON.stringify(notes));
+      document.getElementById("noteInput").value = "";
+      loadNotes();
+    }
+
+    function deleteNote(index) {
+      const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
+      notes.splice(index, 1);
+      localStorage.setItem("sharedNotes", JSON.stringify(notes));
+      loadNotes();
+    }
+
+    loadNotes();
+  </script>
+</body>
+</html>
