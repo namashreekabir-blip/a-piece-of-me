@@ -36,6 +36,8 @@ p.subtitle { text-align: center; margin-bottom: 30px; text-shadow: 1px 1px 8px r
     min-width: 300px;
     max-width: 350px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
 }
 
 /* Notes */
@@ -50,7 +52,7 @@ button:hover { opacity: 0.8; }
 iframe { border-radius: 15px; width: 100%; height: 200px; border: 2px solid rgba(255,255,255,0.6); }
 
 /* Chat */
-.chat-box { max-height: 250px; overflow-y: auto; margin-top: 10px; text-align: left; background: rgba(255,255,255,0.1); border-radius: 10px; padding: 10px;}
+.chat-box { flex: 1; max-height: 250px; overflow-y: auto; margin-top: 10px; text-align: left; background: rgba(255,255,255,0.1); border-radius: 10px; padding: 10px;}
 .message { margin-bottom: 10px; background: rgba(255,255,255,0.3); padding: 5px 10px; border-radius: 10px; color:#000;}
 .message .time { font-size: 0.7rem; color:#555; text-align:right;}
 
@@ -62,8 +64,8 @@ iframe { border-radius: 15px; width: 100%; height: 200px; border: 2px solid rgba
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-</head>
 
+</head>
 <body>
 <h1>Welcome To My Magical Gallery ✨</h1>
 <p class="subtitle">Every color, every moment, a story to tell 💖</p>
@@ -169,4 +171,3 @@ db.ref("chat").on("value", snapshot=>{
 </script>
 </body>
 </html>
-
