@@ -62,8 +62,7 @@ iframe { border-radius: 15px; width: 100%; height: 200px; border: 2px solid rgba
 </style>
 
 <!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
 
 </head>
 <body>
@@ -98,7 +97,8 @@ iframe { border-radius: 15px; width: 100%; height: 200px; border: 2px solid rgba
 <h2 style="text-align:center;margin-bottom:10px;">My Gallery</h2>
 <div class="gallery" id="gallery"></div>
 
-<script>
+    
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js">
 // ===== Gallery Section =====
 const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
 const gallery = document.getElementById('gallery');
@@ -171,3 +171,4 @@ db.ref("chat").on("value", snapshot=>{
 </script>
 </body>
 </html>
+
