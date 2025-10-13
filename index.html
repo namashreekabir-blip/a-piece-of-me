@@ -1,174 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MayBe | MayBeNot</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MayBe | MayBeNot</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 20px;
-    background: linear-gradient(135deg, #fceabb, #f8b500);
-    min-height: 100vh;
-    color: #fff;
-}
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      min-height: 100vh;
+      color: #fff;
+    }
 
-h1 { text-align: center; font-size: 2.8rem; text-shadow: 2px 2px 15px rgba(0,0,0,0.3);}
-p.subtitle { text-align: center; margin-bottom: 30px; text-shadow: 1px 1px 8px rgba(0,0,0,0.2); }
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+    }
+    p.subtitle {
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 8px rgba(0,0,0,0.2);
+    }
 
-.container {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-}
+    .container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
 
-.block {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    padding: 20px;
-    flex: 1;
-    min-width: 300px;
-    max-width: 350px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-}
+    .block {
+      background: rgba(255,255,255,0.6); /* more opaque so blocks visibly stand out */
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 20px;
+      flex: 1;
+      min-width: 300px;
+      max-width: 350px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      color: #000; /* inside block text color black */
+    }
 
-/* Notes */
-textarea { width: 100%; height: 100px; border-radius: 15px; border: none; padding: 10px; resize: none; font-size: 1rem; outline: none; color: #333;}
-button { padding: 10px 20px; border-radius: 20px; border: none; cursor: pointer; margin-top: 10px; font-weight: bold; transition: 0.3s;}
-button:hover { opacity: 0.8; }
-.notes-list { margin-top: 20px; max-height: 200px; overflow-y: auto; text-align: left;}
-.note { background: rgba(255,255,255,0.3); padding: 8px; border-radius: 10px; margin-bottom: 8px; position: relative; color:#000;}
-.note .date { font-size: 0.7rem; text-align: right; color:#555;}
+    /* Notes */
+    textarea {
+      width: 100%;
+      height: 100px;
+      border-radius: 15px;
+      border: none;
+      padding: 10px;
+      resize: none;
+      font-size: 1rem;
+      outline: none;
+      color: #000;
+      background: rgba(255,255,255,0.8);
+    }
+    button {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+    .notes-list {
+      margin-top: 20px;
+      max-height: 200px;
+      overflow-y: auto;
+      text-align: left;
+    }
+    .note {
+      background: rgba(255,255,255,0.9);
+      padding: 8px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      color: #000;
+    }
+    .note .date {
+      font-size: 0.7rem;
+      text-align: right;
+      color: #555;
+    }
 
-/* Song */
-iframe { border-radius: 15px; width: 100%; height: 200px; border: 2px solid rgba(255,255,255,0.6); }
+    /* Song */
+    iframe {
+      border-radius: 15px;
+      width: 100%;
+      height: 200px;
+      border: 2px solid rgba(255,255,255,0.6);
+    }
 
-/* Chat */
-.chat-box { flex: 1; max-height: 250px; overflow-y: auto; margin-top: 10px; text-align: left; background: rgba(255,255,255,0.1); border-radius: 10px; padding: 10px;}
-.message { margin-bottom: 10px; background: rgba(255,255,255,0.3); padding: 5px 10px; border-radius: 10px; color:#000;}
-.message .time { font-size: 0.7rem; color:#555; text-align:right;}
+    /* Chat */
+    .chat-box {
+      flex: 1;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-top: 10px;
+      text-align: left;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 10px;
+      color: #000;
+    }
+    .message {
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.8);
+      padding: 5px 10px;
+      border-radius: 10px;
+      color: #000;
+    }
+    .message .time {
+      font-size: 0.7rem;
+      color: #555;
+      text-align: right;
+    }
 
-/* Gallery */
-.gallery { display:flex; gap:10px; overflow-x:auto; padding:10px; margin-bottom: 40px; }
-.gallery img { width:150px; height:200px; object-fit:cover; border-radius:15px; cursor:pointer; }
-</style>
+    /* Gallery */
+    .gallery {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px;
+      margin-bottom: 40px;
+    }
+    .gallery img {
+      width: 150px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
-<h1>Welcome To My Magical Gallery ✨</h1>
-<p class="subtitle">Every color, every moment, a story to tell 💖</p>
+  <h1>Welcome To My Magical Gallery ✨</h1>
+  <p class="subtitle">Every color, every moment, a story to tell 💖</p>
 
-<div class="container">
+  <div class="container">
     <!-- Notes Block -->
     <div class="block">
-        <h2>💌 Notes</h2>
-        <textarea id="noteInput" placeholder="Write something sweet... 💭"></textarea>
-        <button onclick="saveNote()">Save Note</button>
-        <div class="notes-list" id="notesList"></div>
+      <h2>💌 Notes</h2>
+      <textarea id="noteInput" placeholder="Write something sweet... 💭"></textarea>
+      <button onclick="saveNote()">Save Note</button>
+      <div class="notes-list" id="notesList"></div>
     </div>
 
     <!-- Song Block -->
     <div class="block">
-        <h2>🎵 Song</h2>
-        <iframe src="https://www.youtube.com/embed/m2jSsuNUiJ8" frameborder="0" allowfullscreen></iframe>
+      <h2>🎵 Song</h2>
+      <iframe src="https://www.youtube.com/embed/m2jSsuNUiJ8" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <!-- Chat Block -->
     <div class="block">
-        <h2>💬 Chat</h2>
-        <input type="text" id="chatInput" placeholder="Type your message..." style="width:100%;padding:8px;border-radius:10px;border:none;">
-        <button onclick="sendMessage()">Send</button>
-        <div class="chat-box" id="chatBox"></div>
+      <h2>💬 Chat</h2>
+      <input type="text" id="chatInput" placeholder="Type your message..." style="width:100%;padding:8px;border-radius:10px;border:none;">
+      <button onclick="sendMessage()">Send</button>
+      <div class="chat-box" id="chatBox"></div>
     </div>
-</div>
+  </div>
 
-<!-- Gallery -->
-<h2 style="text-align:center;margin-bottom:10px;">My Gallery</h2>
-<div class="gallery" id="gallery"></div>
+  <h2 style="text-align:center;margin-bottom:10px;">My Gallery</h2>
+  <div class="gallery" id="gallery"></div>
 
-<!-- Firebase Scripts -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-<script>
-// ===== Gallery Section =====
-const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
-const gallery = document.getElementById('gallery');
-images.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    gallery.appendChild(img);
-});
+  <script>
+    // Gallery
+    const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
+    const gallery = document.getElementById('gallery');
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      gallery.appendChild(img);
+    });
 
-// ===== Notes Section =====
-function loadNotes() {
-    const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
-    const list = document.getElementById("notesList");
-    list.innerHTML = "";
-    notes.forEach(n=>{
+    // Notes
+    function loadNotes() {
+      const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
+      const list = document.getElementById("notesList");
+      list.innerHTML = "";
+      notes.forEach(n => {
         const div = document.createElement("div");
         div.className = "note";
         div.innerHTML = `<p>${n.text}</p><div class="date">${n.date}</div>`;
         list.appendChild(div);
-    });
-}
-function saveNote(){
-    const text = document.getElementById("noteInput").value;
-    if(!text.trim()) return;
-    const note = {text,date:new Date().toLocaleString()};
-    const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
-    notes.push(note);
-    localStorage.setItem("sharedNotes",JSON.stringify(notes));
-    document.getElementById("noteInput").value="";
+      });
+    }
+    function saveNote(){
+      const text = document.getElementById("noteInput").value;
+      if(!text.trim()) return;
+      const note = { text, date: new Date().toLocaleString() };
+      const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
+      notes.push(note);
+      localStorage.setItem("sharedNotes", JSON.stringify(notes));
+      document.getElementById("noteInput").value = "";
+      loadNotes();
+    }
     loadNotes();
-}
-loadNotes();
 
-// ===== Firebase Chat Setup =====
-const firebaseConfig = {
-  apiKey: "AIzaSyDnVN3MFbB8_4hYHDbHY_OFdlG6NdZoFN4",
-  authDomain: "maybemaybenot-eaa41.firebaseapp.com",
-  databaseURL: "https://maybemaybenot-eaa41-default-rtdb.firebaseio.com/",
-  projectId: "maybemaybenot-eaa41",
-  storageBucket: "maybemaybenot-eaa41.firebasestorage.app",
-  messagingSenderId: "811933656187",
-  appId: "1:811933656187:web:e0b0f30441b61586da2ede",
-  measurementId: "G-9ELBC2WJDC"
-};
+    // Firebase Chat
+    const firebaseConfig = {
+      apiKey: "AIzaSyDnVN3MFbB8_4hYHDbHY_OFdlG6NdZoFN4",
+      authDomain: "maybemaybenot-eaa41.firebaseapp.com",
+      databaseURL: "https://maybemaybenot-eaa41-default-rtdb.firebaseio.com/",
+      projectId: "maybemaybenot-eaa41",
+      storageBucket: "maybemaybenot-eaa41.firebasestorage.app",
+      messagingSenderId: "811933656187",
+      appId: "1:811933656187:web:e0b0f30441b61586da2ede",
+      measurementId: "G-9ELBC2WJDC"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const chatBox = document.getElementById("chatBox");
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-const chatBox = document.getElementById("chatBox");
+    function sendMessage(){
+      const msg = document.getElementById("chatInput").value;
+      if(!msg.trim()) return;
+      const messageObj = { text: msg, time: new Date().toLocaleTimeString() };
+      db.ref("chat").push(messageObj)
+        .then(() => console.log("sent"))
+        .catch(err => console.error("error:", err));
+      document.getElementById("chatInput").value = "";
+    }
 
-// Send Message
-function sendMessage(){
-    const msg = document.getElementById("chatInput").value;
-    if(!msg.trim()) return;
-    const messageObj = { text: msg, time: new Date().toLocaleTimeString() };
-    db.ref("chat").push(messageObj);
-    document.getElementById("chatInput").value="";
-}
-
-// Load Messages Realtime
-db.ref("chat").on("value", snapshot=>{
-    chatBox.innerHTML = "";
-    snapshot.forEach(snap=>{
+    db.ref("chat").on("value", snapshot => {
+      chatBox.innerHTML = "";
+      snapshot.forEach(snap => {
         const m = snap.val();
         const div = document.createElement("div");
         div.className = "message";
         div.innerHTML = `<strong>💬</strong> ${m.text} <div class="time">${m.time}</div>`;
         chatBox.appendChild(div);
+      });
+      chatBox.scrollTop = chatBox.scrollHeight;
     });
-    chatBox.scrollTop = chatBox.scrollHeight;
-});
-</script>
+  </script>
+
 </body>
 </html>
