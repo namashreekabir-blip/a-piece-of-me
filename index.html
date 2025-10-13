@@ -57,12 +57,13 @@ iframe { border-radius: 15px; width: 100%; height: 200px; border: 2px solid rgba
 /* Gallery */
 .gallery { display:flex; gap:10px; overflow-x:auto; padding:10px; margin-bottom: 40px; }
 .gallery img { width:150px; height:200px; object-fit:cover; border-radius:15px; cursor:pointer; }
-
 </style>
+
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
+
 <body>
 <h1>Welcome To My Magical Gallery ✨</h1>
 <p class="subtitle">Every color, every moment, a story to tell 💖</p>
@@ -96,7 +97,7 @@ iframe { border-radius: 15px; width: 100%; height: 200px; border: 2px solid rgba
 <div class="gallery" id="gallery"></div>
 
 <script>
-// Gallery images
+// ===== Gallery Section =====
 const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
 const gallery = document.getElementById('gallery');
 images.forEach(src => {
@@ -105,7 +106,7 @@ images.forEach(src => {
     gallery.appendChild(img);
 });
 
-// Notes Section
+// ===== Notes Section =====
 function loadNotes() {
     const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
     const list = document.getElementById("notesList");
@@ -129,41 +130,42 @@ function saveNote(){
 }
 loadNotes();
 
-// Firebase Chat Setup
+// ===== Firebase Chat Setup =====
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT.firebaseio.com",
-    projectId: "YOUR_PROJECT",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "XXXX",
-    appId: "XXXX"
+  apiKey: "AIzaSyDnVN3MFbB8_4hYHDbHY_OFdlG6NdZoFN4",
+  authDomain: "maybemaybenot-eaa41.firebaseapp.com",
+  databaseURL: "https://maybemaybenot-eaa41-default-rtdb.firebaseio.com/",
+  projectId: "maybemaybenot-eaa41",
+  storageBucket: "maybemaybenot-eaa41.firebasestorage.app",
+  messagingSenderId: "811933656187",
+  appId: "1:811933656187:web:e0b0f30441b61586da2ede",
+  measurementId: "G-9ELBC2WJDC"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const chatBox = document.getElementById("chatBox");
 
+// Send Message
 function sendMessage(){
     const msg = document.getElementById("chatInput").value;
     if(!msg.trim()) return;
-    const messageObj = {text: msg, time: new Date().toLocaleTimeString()};
+    const messageObj = { text: msg, time: new Date().toLocaleTimeString() };
     db.ref("chat").push(messageObj);
     document.getElementById("chatInput").value="";
 }
 
-// Load messages in real-time
+// Load Messages Realtime
 db.ref("chat").on("value", snapshot=>{
     chatBox.innerHTML = "";
     snapshot.forEach(snap=>{
         const m = snap.val();
         const div = document.createElement("div");
-        div.className="message";
-        div.innerHTML = `<strong>You:</strong> ${m.text} <div class="time">${m.time}</div>`;
+        div.className = "message";
+        div.innerHTML = `<strong>💬</strong> ${m.text} <div class="time">${m.time}</div>`;
         chatBox.appendChild(div);
-        chatBox.scrollTop = chatBox.scrollHeight;
     });
+    chatBox.scrollTop = chatBox.scrollHeight;
 });
 </script>
 </body>
 </html>
-
