@@ -180,7 +180,12 @@
   align-self: flex-end;
   border-radius: 12px 12px 0 12px;
   text-align: right;
-  max
+  max-width: 70%;
+  margin: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
 
 /* Other’s message — appears on left */
 .other-message {
@@ -190,12 +195,14 @@
   border-radius: 12px 12px 12px 0;
   text-align: left;
   max-width: 70%;
+  margin: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
     .my-message, .other-message {
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
-
-   .message {
+  .message {
   display: inline-block;
   padding: 8px 12px;
   margin: 6px 0;
@@ -203,7 +210,7 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   word-wrap: break-word;
 }
-  .time {
+ .time {
   font-size: 0.7rem;
   color: #333;
   margin-top: 4px;
@@ -427,6 +434,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
