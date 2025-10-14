@@ -295,6 +295,12 @@
   </style>
 </head>
 <body>
+<script>
+  // Redirect to login if user not logged in
+  if (!localStorage.getItem("chatUser")) {
+    window.location.href = "login.html";
+  }
+</script>
 
 
   <h1>Welcome To My Magical World✨</h1>
@@ -467,6 +473,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
