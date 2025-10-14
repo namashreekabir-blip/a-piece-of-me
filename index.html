@@ -143,6 +143,29 @@
       border-radius: 15px;
       cursor: pointer;
     }
+
+.my-message {
+    background: rgba(255,255,255,0.7);
+    color: #000;
+    text-align: left;
+    align-self: flex-start;
+    border-radius: 15px 15px 15px 0;
+    margin: 8px;
+    padding: 8px 12px;
+    max-width: 70%;
+}
+
+.other-message {
+    background: rgba(0,0,0,0.2);
+    color: #fff;
+    text-align: left;
+    align-self: flex-end;
+    border-radius: 15px 15px 0 15px;
+    margin: 8px;
+    padding: 8px 12px;
+    max-width: 70%;
+}
+    
   </style>
 </head>
 <body>
@@ -229,31 +252,50 @@
     const db = firebase.database();
     const chatBox = document.getElementById("chatBox");
 
-    function sendMessage(){
-      const msg = document.getElementById("chatInput").value;
-      if(!msg.trim()) return;
-      const messageObj = { text: msg, time: new Date().toLocaleTimeString() };
-      db.ref("chat").push(messageObj)
-        .then(() => console.log("sent"))
-        .catch(err => console.error("error:", err));
-      document.getElementById("chatInput").value = "";
-    }
+   function sendMessage() {
+    const msg = document.getElementById("chatInput").value;
+    if (!msg.trim()) return;
 
-    db.ref("chat").on("value", snapshot => {
-      chatBox.innerHTML = "";
-      snapshot.forEach(snap => {
+    const currentUser = localStorage.getItem("chatUser") || "You";
+    const now = new Date();
+    const messageObj = {
+        text: msg,
+        sender: currentUser,
+        date: now.toLocaleDateString(),
+        time: now.toLocaleTimeString()
+    };
+    db.ref("chat").push(messageObj);
+    document.getElementById("chatInput").value = "";
+}
+
+// Load Messages Realtime with sender side + date
+db.ref("chat").on("value", snapshot => {
+    chatBox.innerHTML = "";
+    snapshot.forEach(snap => {
         const m = snap.val();
         const div = document.createElement("div");
-        div.className = "message";
-        div.innerHTML = `<strong>💬</strong> ${m.text} <div class="time">${m.time}</div>`;
+
+        // Identify your own messages
+        const currentUser = localStorage.getItem("chatUser") || "You";
+        const sender = m.sender || "Unknown";
+
+        if (sender === currentUser) {
+            div.className = "message my-message";
+            div.innerHTML = `<p>${m.text}</p><div class="time">${m.date} | ${m.time}</div>`;
+        } else {
+            div.className = "message other-message";
+            div.innerHTML = `<p>${m.text}</p><div class="time">${sender} • ${m.date} | ${m.time}</div>`;
+        }
         chatBox.appendChild(div);
-      });
-      chatBox.scrollTop = chatBox.scrollHeight;
     });
+    chatBox.scrollTop = chatBox.scrollHeight;
+});
+
   </script>
 
 </body>
 </html>
+
 
 
 
