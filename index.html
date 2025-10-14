@@ -301,13 +301,15 @@
 
   <div class="container">
  <!-- Notes Section -->
+    <div class="block">
   <section class="note-section">
-    <h2>💌 Things to Tell Each Other 💌</h2>
+    <h2>Things to Tell Each Other 💌</h2>
     <div id="currentDate"></div>
     <textarea id="noteInput" placeholder="Write something sweet... 💭"></textarea>
     <button class="save-btn" onclick="saveNote()">Save Note</button>
     <div class="notes-list" id="notesList"></div>
   </section>
+    </div>
 
 
     <!-- Song Block -->
@@ -461,6 +463,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
