@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | MayBeNot</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      animation: backgroundShift 20s infinite alternate;
+      color: #fff;
+    }
+
+    @keyframes backgroundShift {
+      0% {background: linear-gradient(135deg, #fceabb, #f8b500);}
+      50% {background: linear-gradient(135deg, #a1c4fd, #c2e9fb);}
+      100% {background: linear-gradient(135deg, #f5c7b8, #c9d6ff);}
+    }
+
+    .login-container {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(15px);
+      padding: 40px 30px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      width: 300px;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      font-size: 2rem;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      margin: 10px 0;
+      border-radius: 15px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px 0;
+      border-radius: 25px;
+      border: none;
+      background: rgba(0, 195, 255, 0.5);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: rgba(0, 195, 255, 0.8);
+    }
+
+    #errorMsg {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #ffcccb;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>🔒 Enter Magical World</h1>
+    <input type="text" id="nickname" placeholder="Enter your nickname">
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="login()">Login</button>
+    <p id="errorMsg"></p>
+  </div>
+
+  <script>
+    // Set your master password here
+    const MASTER_PASSWORD = "rutank-";
+
+    function login() {
+      const nickname = document.getElementById("nickname").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+
+      if(!nickname || !password) {
+        errorMsg.textContent = "Please enter both nickname and password.";
+        return;
+      }
+
+      if(password === MASTER_PASSWORD) {
+        // Save nickname to localStorage for chat page
+        localStorage.setItem("chatUser", nickname);
+
+        // Redirect to your main page
+        window.location.href = "index.html"; // change to your main magical world page
+      } else {
+        errorMsg.textContent = "Incorrect password!";
+      }
+    }
+  </script>
+
+</body>
+</html>
