@@ -300,13 +300,15 @@
   <p class="subtitle">Every color, every moment, a story to tell 💖</p>
 
   <div class="container">
-    <!-- Notes Block -->
-    <div class="block">
-      <h2>💌 Notes</h2>
-      <textarea id="noteInput" placeholder="Write something sweet... 💭"></textarea>
-      <button onclick="saveNote()">Save Note</button>
-      <div class="notes-list" id="notesList"></div>
-    </div>
+ <!-- Notes Section -->
+  <section class="note-section">
+    <h2>💌 Things to Tell Each Other 💌</h2>
+    <div id="currentDate"></div>
+    <textarea id="noteInput" placeholder="Write something sweet... 💭"></textarea>
+    <button class="save-btn" onclick="saveNote()">Save Note</button>
+    <div class="notes-list" id="notesList"></div>
+  </section>
+
 
     <!-- Song Block -->
     <div class="block">
@@ -459,6 +461,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
