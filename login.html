@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | MayBeNot</title>
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
@@ -12,40 +11,32 @@
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       background: linear-gradient(135deg, #fceabb, #f8b500);
-      animation: backgroundShift 20s infinite alternate;
       color: #fff;
     }
 
-    @keyframes backgroundShift {
-      0% {background: linear-gradient(135deg, #fceabb, #f8b500);}
-      50% {background: linear-gradient(135deg, #a1c4fd, #c2e9fb);}
-      100% {background: linear-gradient(135deg, #f5c7b8, #c9d6ff);}
-    }
-
-    .login-container {
-      background: rgba(255,255,255,0.2);
+    .login-box {
+      background: rgba(255,255,255,0.15);
       backdrop-filter: blur(15px);
-      padding: 40px 30px;
+      padding: 40px;
       border-radius: 25px;
       text-align: center;
+      width: 320px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      width: 300px;
     }
 
     h1 {
-      margin-bottom: 25px;
-      font-size: 2rem;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
     }
 
     input {
       width: 100%;
-      padding: 10px 12px;
+      padding: 10px;
       margin: 10px 0;
       border-radius: 15px;
       border: none;
@@ -55,77 +46,59 @@
 
     button {
       width: 100%;
-      padding: 10px 0;
-      border-radius: 25px;
+      padding: 10px;
+      border-radius: 20px;
       border: none;
-      background: rgba(0, 195, 255, 0.5);
-      color: #fff;
+      background-color: #00bfff;
+      color: white;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 15px;
-      transition: 0.3s;
+      transition: background 0.3s;
     }
 
     button:hover {
-      background: rgba(0, 195, 255, 0.8);
+      background-color: #0099cc;
     }
 
-    #errorMsg {
-      margin-top: 10px;
+    p {
       font-size: 0.9rem;
-      color: #ffcccb;
+      color: #ffdddd;
+      margin-top: 10px;
     }
-
   </style>
 </head>
 <body>
 
-  <div class="login-container">
-    <h1>🔒 Enter Magical World</h1>
-    <input type="text" id="nickname" placeholder="Enter your name">
-    <input type="password" id="password" placeholder="Enter password">
+  <div class="login-box">
+    <h1>💫 Welcome Back</h1>
+    <input type="text" id="nickname" placeholder="Enter your nickname">
+    <input type="password" id="password" placeholder="Enter shared password">
     <button onclick="login()">Login</button>
     <p id="errorMsg"></p>
   </div>
 
- <script>
-  const SHARED_PASSWORD = "magical123";
+  <script>
+    const MASTER_PASSWORD = "rutank-"; // change password here
 
-  function login() {
-    const nickname = document.getElementById("nickname").value.trim();
-    const pass = document.getElementById("loginPass").value.trim();
-    const errorEl = document.getElementById("loginError");
+    function login() {
+      const name = document.getElementById("nickname").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const error = document.getElementById("errorMsg");
 
-    if (!nickname || !pass) {
-      errorEl.textContent = "Please enter nickname and password";
-      return;
+      if (!name || !pass) {
+        error.textContent = "Please enter nickname and password";
+        return;
+      }
+
+      if (pass === MASTER_PASSWORD) {
+        localStorage.setItem("chatUser", name);
+        window.location.href = "index.html";
+      } else {
+        error.textContent = "Wrong password!";
+      }
     }
-
-    if (pass === SHARED_PASSWORD) {
-      localStorage.setItem("chatUser", nickname);
-      document.getElementById("loginModal").style.display = "none";
-      document.getElementById("mainContent").style.display = "flex";
-    } else {
-      errorEl.textContent = "Wrong password! Check caps and spelling";
-    }
-  }
-
-  // 🔹 Page load check
-  window.onload = function() {
-    const user = localStorage.getItem("chatUser");
-    if (user) {
-      // Already logged in
-      document.getElementById("loginModal").style.display = "none";
-      document.getElementById("mainContent").style.display = "flex";
-    } else {
-      // Show login modal
-      document.getElementById("loginModal").style.display = "flex";
-      document.getElementById("mainContent").style.display = "none";
-    }
-  }
-</script>
-
-
+  </script>
 </body>
 </html>
+
