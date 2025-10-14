@@ -270,25 +270,25 @@
     }
 
 .my-message {
-    background: rgba(255,255,255,0.7);
-    color: #000;
-    text-align: left;
-    align-self: flex-start;
-    border-radius: 15px 15px 15px 0;
-    margin: 8px;
-    padding: 8px 12px;
-    max-width: 70%;
+  background: rgba(255, 255, 255, 0.7);
+  color: #000;
+  text-align: left;
+  align-self: flex-start;
+  border-radius: 15px 15px 15px 0;
+  margin: 8px;
+  padding: 8px 12px;
+  max-width: 70%;
 }
 
 .other-message {
-    background: rgba(0,0,0,0.2);
-    color: #fff;
-    text-align: left;
-    align-self: flex-end;
-    border-radius: 15px 15px 0 15px;
-    margin: 8px;
-    padding: 8px 12px;
-    max-width: 70%;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-align: left;
+  align-self: flex-end;
+  border-radius: 15px 15px 0 15px;
+  margin: 8px;
+  padding: 8px 12px;
+  max-width: 70%;
 }
     
   </style>
@@ -438,31 +438,35 @@
 
 // Load Messages Realtime with sender side + date
 db.ref("chat").on("value", snapshot => {
-    chatBox.innerHTML = "";
-    snapshot.forEach(snap => {
-        const m = snap.val();
-        const div = document.createElement("div");
+  chatBox.innerHTML = "";
+  snapshot.forEach(snap => {
+    const m = snap.val();
+    const div = document.createElement("div");
 
-        // Identify your own messages
-        const currentUser = localStorage.getItem("chatUser") || "You";
-        const sender = m.sender || "Unknown";
+    // Identify the current user
+    const currentUser = localStorage.getItem("chatUser") || "You";
+    const sender = m.sender || "Unknown";
 
-        if (sender === currentUser) {
-            div.className = "message my-message";
-            div.innerHTML = `<p>${m.text}</p><div class="time">${m.date} | ${m.time}</div>`;
-        } else {
-            div.className = "message other-message";
-            div.innerHTML = `<p>${m.text}</p><div class="time">${sender} • ${m.date} | ${m.time}</div>`;
-        }
-        chatBox.appendChild(div);
-    });
-    chatBox.scrollTop = chatBox.scrollHeight;
+    // Assign class based on sender
+    if (sender === currentUser) {
+      div.className = "message my-message";
+      div.innerHTML = `<p>${m.text}</p><div class="time">${m.date} | ${m.time}</div>`;
+    } else {
+      div.className = "message other-message";
+      div.innerHTML = `<p>${m.text}</p><div class="time">${sender} • ${m.date} | ${m.time}</div>`;
+    }
+
+    chatBox.appendChild(div);
+  });
+  chatBox.scrollTop = chatBox.scrollHeight;
 });
+
 
   </script>
 
 </body>
 </html>
+
 
 
 
