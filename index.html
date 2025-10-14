@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MayBe | MayBeNot</title>
-  	<link rel="stylesheet" href="login.html">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
@@ -28,29 +27,21 @@
       100% {background: linear-gradient(135deg, #f5c7b8, #c9d6ff);}
     }
 
-    h1 {
-      text-align: center;
-      font-size: 2.8rem;
-      text-shadow: 2px 2px 15px rgba(0,0,0,0.3);
-    }
-    p.subtitle {
-      text-align: center;
-      margin-bottom: 30px;
-      text-shadow: 1px 1px 8px rgba(0,0,0,0.2);
-    }
+    h1 { text-align: center; font-size: 2.8rem; text-shadow: 2px 2px 15px rgba(0,0,0,0.3); }
+    p.subtitle { text-align: center; margin-bottom: 30px; text-shadow: 1px 1px 8px rgba(0,0,0,0.2); }
 
     /* Login Modal */
     #loginModal {
       position: fixed;
       top: 0; left: 0; right:0; bottom:0;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.95);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 9999;
     }
     #loginBox {
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.95);
       color: #000;
       padding: 40px 30px;
       border-radius: 25px;
@@ -77,9 +68,10 @@
       color: #fff;
       transition: 0.3s;
     }
-    #loginBox button:hover {
-      background: #0099cc;
-    }
+    #loginBox button:hover { background: #0099cc; }
+
+    /* Hide content until login */
+    #mainContent { display: none; }
 
     /* Existing body styles and blocks... */
     .container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
@@ -113,33 +105,35 @@
     </div>
   </div>
 
-  <!-- Existing content -->
-  <h1>Welcome To My Magical World✨</h1>
-  <p class="subtitle">Every color, every moment, a story to tell 💖</p>
+  <!-- Main Content Hidden until login -->
+  <div id="mainContent">
+    <h1>Welcome To My Magical World✨</h1>
+    <p class="subtitle">Every color, every moment, a story to tell 💖</p>
 
-  <div class="container">
-    <!-- Notes Section -->
-    <div class="block">
-      <section class="note-section">
-        <h2>Things to Tell Each Other 💌</h2>
-        <textarea id="noteInput" placeholder="Write something sweet... 💭"></textarea>
-        <button class="save-btn" onclick="saveNote()">Save Note</button>
-        <div class="notes-list" id="notesList"></div>
-      </section>
-    </div>
+    <div class="container">
+      <!-- Notes Section -->
+      <div class="block">
+        <section class="note-section">
+          <h2>Things to Tell Each Other 💌</h2>
+          <textarea id="noteInput" placeholder="Write something sweet... 💭"></textarea>
+          <button class="save-btn" onclick="saveNote()">Save Note</button>
+          <div class="notes-list" id="notesList"></div>
+        </section>
+      </div>
 
-    <!-- Song Block -->
-    <div class="block">
-      <h2>🎵 Song</h2>
-      <iframe src="https://www.youtube.com/embed/m2jSsuNUiJ8" frameborder="0" allowfullscreen></iframe>
-    </div>
+      <!-- Song Block -->
+      <div class="block">
+        <h2>🎵 Song</h2>
+        <iframe src="https://www.youtube.com/embed/m2jSsuNUiJ8" frameborder="0" allowfullscreen></iframe>
+      </div>
 
-    <!-- Chat Block -->
-    <div class="block">
-      <h2>💬 Chat</h2>
-      <input type="text" id="chatInput" placeholder="Type your message..." style="width:100%;padding:8px;border-radius:10px;border:none;">
-      <button onclick="sendMessage()">Send</button>
-      <div class="chat-box" id="chatBox"></div>
+      <!-- Chat Block -->
+      <div class="block">
+        <h2>💬 Chat</h2>
+        <input type="text" id="chatInput" placeholder="Type your message..." style="width:100%;padding:8px;border-radius:10px;border:none;">
+        <button onclick="sendMessage()">Send</button>
+        <div class="chat-box" id="chatBox"></div>
+      </div>
     </div>
   </div>
 
@@ -148,7 +142,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
   <script>
-    // Set your shared password here
+    // Shared password
     const SHARED_PASSWORD = "magical123";
 
     function login() {
@@ -164,12 +158,13 @@
       if(pass === SHARED_PASSWORD) {
         localStorage.setItem("chatUser", nickname);
         document.getElementById("loginModal").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
       } else {
         errorEl.textContent = "Wrong password!";
       }
     }
 
-    // Existing Notes and Firebase chat logic here...
+    // Notes functions
     function loadNotes() {
       const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
       const list = document.getElementById("notesList");
@@ -252,9 +247,7 @@
       });
       chatBox.scrollTop = chatBox.scrollHeight;
     });
-
   </script>
 
 </body>
 </html>
-
