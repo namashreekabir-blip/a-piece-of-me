@@ -173,42 +173,41 @@
       padding: 10px;
       color: #000;
     }
-  .my-message {
-  background: rgba(200, 255, 200, 0.8); /* light green bubble for your messages */
-  color: #000;
-  align-self: flex-start;
-  border-radius: 12px 12px 12px 0;
-  margin: 6px 0 6px 6px;
-  padding: 8px 12px;
-  max-width: 70%;
-}
-
-.other-message {
-  background: rgba(255, 255, 255, 0.8); /* light bubble for others */
+/* Your message — appears on right */
+.my-message {
+  background: rgba(0, 200, 255, 0.7);
   color: #000;
   align-self: flex-end;
   border-radius: 12px 12px 0 12px;
-  margin: 6px 6px 6px 0;
-  padding: 8px 12px;
+  text-align: right;
+  max
+
+/* Other’s message — appears on left */
+.other-message {
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+  align-self: flex-start;
+  border-radius: 12px 12px 12px 0;
+  text-align: left;
   max-width: 70%;
 }
-
     .my-message, .other-message {
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-    .message {
-      margin-bottom: 10px;
-      background: rgba(255,255,255,0.8);
-      padding: 5px 10px;
-      border-radius: 10px;
-      color: #000;
-    }
-    .message .time {
-      font-size: 0.7rem;
-      color: #555;
-      text-align: right;
-    }
+   .message {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  word-wrap: break-word;
+}
+  .time {
+  font-size: 0.7rem;
+  color: #333;
+  margin-top: 4px;
+}
 
     .section-title {
       font-size: 2rem;
@@ -426,6 +425,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
