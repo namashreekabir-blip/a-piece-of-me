@@ -7,14 +7,20 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-    body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 20px;
-    background: #1E90FF; /* solid blue background */
-    min-height: 100vh;
-    color: #fff;
-}
+     body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      color: #fff;
+      text-align: center;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 50px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: backgroundShift 20s infinite alternate;
+    }
     @keyframes backgroundShift {
       0% {background: linear-gradient(135deg, #fceabb, #f8b500);}
       50% {background: linear-gradient(135deg, #a1c4fd, #c2e9fb);}
@@ -155,6 +161,8 @@
 
     /* Chat */
     .chat-box {
+      display: flex;
+      flex-direction: column;
       flex: 1;
       max-height: 250px;
       overflow-y: auto;
@@ -165,6 +173,30 @@
       padding: 10px;
       color: #000;
     }
+  .my-message {
+  background: rgba(200, 255, 200, 0.8); /* light green bubble for your messages */
+  color: #000;
+  align-self: flex-start;
+  border-radius: 12px 12px 12px 0;
+  margin: 6px 0 6px 6px;
+  padding: 8px 12px;
+  max-width: 70%;
+}
+
+.other-message {
+  background: rgba(255, 255, 255, 0.8); /* light bubble for others */
+  color: #000;
+  align-self: flex-end;
+  border-radius: 12px 12px 0 12px;
+  margin: 6px 6px 6px 0;
+  padding: 8px 12px;
+  max-width: 70%;
+}
+
+    .my-message, .other-message {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
     .message {
       margin-bottom: 10px;
       background: rgba(255,255,255,0.8);
@@ -394,6 +426,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
