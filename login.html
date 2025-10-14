@@ -89,31 +89,43 @@
     <p id="errorMsg"></p>
   </div>
 
-  <script>
-    // Set your master password here
-    const MASTER_PASSWORD = "rutank-";
+ <script>
+  const SHARED_PASSWORD = "magical123";
 
-    function login() {
-      const nickname = document.getElementById("nickname").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const errorMsg = document.getElementById("errorMsg");
+  function login() {
+    const nickname = document.getElementById("nickname").value.trim();
+    const pass = document.getElementById("loginPass").value.trim();
+    const errorEl = document.getElementById("loginError");
 
-      if(!nickname || !password) {
-        errorMsg.textContent = "Please enter both nickname and password.";
-        return;
-      }
-
-      if(password === MASTER_PASSWORD) {
-        // Save nickname to localStorage for chat page
-        localStorage.setItem("chatUser", nickname);
-
-        // Redirect to your main page
-        window.location.href = "index.html"; // change to your main magical world page
-      } else {
-        errorMsg.textContent = "Incorrect password!";
-      }
+    if (!nickname || !pass) {
+      errorEl.textContent = "Please enter nickname and password";
+      return;
     }
-  </script>
+
+    if (pass === SHARED_PASSWORD) {
+      localStorage.setItem("chatUser", nickname);
+      document.getElementById("loginModal").style.display = "none";
+      document.getElementById("mainContent").style.display = "flex";
+    } else {
+      errorEl.textContent = "Wrong password! Check caps and spelling";
+    }
+  }
+
+  // 🔹 Page load check
+  window.onload = function() {
+    const user = localStorage.getItem("chatUser");
+    if (user) {
+      // Already logged in
+      document.getElementById("loginModal").style.display = "none";
+      document.getElementById("mainContent").style.display = "flex";
+    } else {
+      // Show login modal
+      document.getElementById("loginModal").style.display = "flex";
+      document.getElementById("mainContent").style.display = "none";
+    }
+  }
+</script>
+
 
 </body>
 </html>
