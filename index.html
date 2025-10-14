@@ -15,7 +15,10 @@
     min-height: 100vh;
     color: #fff;
 }
-
+  @keyframes glow {
+      from { box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+      to { box-shadow: 0 0 35px rgba(255,255,255,0.6); }
+    }
 
 
     h1 {
@@ -35,6 +38,42 @@
       justify-content: center;
       flex-wrap: wrap;
       margin-bottom: 40px;
+    }
+    
+    .slider-container {
+      width: 90%;
+      overflow-x: auto;
+      display: flex;
+      gap: 20px;
+      padding: 20px 0;
+      scroll-behavior: smooth;
+      border-radius: 25px;
+      margin-bottom: 60px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .slider-container::-webkit-scrollbar { height: 8px; }
+    .slider-container::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+    }
+
+    .slider-container img {
+      width: 200px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .slider-container img:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
     }
 
  .block {
@@ -211,14 +250,24 @@
     </div>
   </div>
 
-  <h2 style="text-align:center;margin-bottom:10px;">My Gallery</h2>
-  <div class="gallery" id="gallery"></div>
+  
+  <!-- Main Gallery Slider -->
+  <div class="section-title">My Moments & Memories</div>
+  <div class="slider-container" id="gallery"></div>
+
+  <!-- Blue Collection -->
+  <button id="showBlue" onclick="showBlueCollection()">💙</button>
+  <div class="section-title" id="blueTitle" style="display:none;">Things you Should Know💙</div>
+  <p id="blueDesc" style="display:none;">Because even silly things deserve to be remembered beautifully🌷💫</p>
+  <div class="slider-container" id="blueGallery" style="display:none;"></div>
+
 
   <!-- Firebase Scripts -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
   <script>
+    
     // Gallery
     const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
     const gallery = document.getElementById('gallery');
@@ -227,8 +276,8 @@
       img.src = src;
       gallery.appendChild(img);
     });
-
-     const blueImages = ['bajari.jpeg','chapti.avif','jwar.jpeg','.jpg'];
+    
+    const blueImages = ['bajari.jpeg','chapti.avif','jwar.jpeg','.jpg'];
     const blueGallery = document.getElementById('blueGallery');
     const blueTitle = document.getElementById('blueTitle');
     const blueDesc = document.getElementById('blueDesc');
@@ -328,6 +377,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
