@@ -369,17 +369,20 @@
     }
 
     // Notes
-    function loadNotes() {
+     function loadNotes() {
       const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
       const list = document.getElementById("notesList");
       list.innerHTML = "";
-      notes.forEach(n => {
+      notes.forEach((n, index) => {
         const div = document.createElement("div");
         div.className = "note";
-        div.innerHTML = `<p>${n.text}</p><div class="date">${n.date}</div>`;
+        div.innerHTML = `<p>${n.text}</p>
+                         <div class="date">${n.date}</div>
+                         <button class="delete-btn" onclick="deleteNote(${index})">Delete</button>`;
         list.appendChild(div);
       });
     }
+    
     function saveNote(){
       const text = document.getElementById("noteInput").value;
       if(!text.trim()) return;
@@ -456,6 +459,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
