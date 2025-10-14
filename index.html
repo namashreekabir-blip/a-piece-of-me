@@ -128,6 +128,21 @@
       text-align: right;
     }
 
+      #showBlue {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: rgba(0, 195, 255, 0.5);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-bottom: 30px;
+    }
+
+    #showBlue:hover {
+      background: rgba(0, 195, 255, 0.8);
+    }
     /* Gallery */
     .gallery {
       display: flex;
@@ -213,6 +228,24 @@
       gallery.appendChild(img);
     });
 
+     const blueImages = ['bajari.jpeg','chapti.avif','jwar.jpeg','.jpg'];
+    const blueGallery = document.getElementById('blueGallery');
+    const blueTitle = document.getElementById('blueTitle');
+    const blueDesc = document.getElementById('blueDesc');
+
+    function showBlueCollection() {
+      blueGallery.style.display = 'flex';
+      blueTitle.style.display = 'block';
+      blueDesc.style.display = 'block';
+      blueGallery.innerHTML = '';
+      blueImages.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        blueGallery.appendChild(img);
+      });
+      document.getElementById('showBlue').style.display = 'none';
+    }
+
     // Notes
     function loadNotes() {
       const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
@@ -295,6 +328,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
