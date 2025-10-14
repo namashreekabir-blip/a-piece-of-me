@@ -150,6 +150,22 @@
       text-align: right;
       color: #555;
     }
+    .note button.delete-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .note button.delete-btn:hover {
+      background: #ff1a1a;
+    }
 
     /* Song */
     iframe {
@@ -374,6 +390,12 @@
       document.getElementById("noteInput").value = "";
       loadNotes();
     }
+     function deleteNote(index) {
+      const notes = JSON.parse(localStorage.getItem("sharedNotes")) || [];
+      notes.splice(index, 1);
+      localStorage.setItem("sharedNotes", JSON.stringify(notes));
+      loadNotes();
+    }
     loadNotes();
 
     // Firebase Chat
@@ -434,6 +456,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
