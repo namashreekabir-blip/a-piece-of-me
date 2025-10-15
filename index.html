@@ -293,8 +293,10 @@
 </head>
 <body>
 <script>
-  // Redirect to login if user not logged in
-  if (!localStorage.getItem("chatUser")) {
+  // check if user is logged in
+  const user = localStorage.getItem("chatUser");
+  if (!user) {
+    // if no user, redirect to login page
     window.location.href = "login.html";
   }
 </script>
@@ -342,6 +344,8 @@
   <p id="blueDesc" style="display:none;">Because even silly things deserve to be remembered beautifully🌷💫</p>
   <div class="slider-container" id="blueGallery" style="display:none;"></div>
 
+   <!-- logout -->
+  <button onclick="logout()">Logout</button>
 
   <!-- Firebase Scripts -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -439,6 +443,12 @@
     db.ref("chat").push(messageObj);
     document.getElementById("chatInput").value = "";
 }
+    
+function logout() {
+  localStorage.removeItem("chatUser");
+  window.location.href = "login.html";
+}
+
 
 // Load Messages Realtime with sender side + date
 db.ref("chat").on("value", snapshot => {
@@ -470,6 +480,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
