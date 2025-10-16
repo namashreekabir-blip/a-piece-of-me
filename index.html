@@ -428,21 +428,21 @@
     const db = firebase.database();
     const chatBox = document.getElementById("chatBox");
 
-   function sendMessage() {
-    const msg = document.getElementById("chatInput").value;
-    if (!msg.trim()) return;
+function sendMessage() {
+  const msg = document.getElementById("chatInput").value;
+  if (!msg.trim()) return;
 
-    const currentUser = localStorage.getItem("chatUser") || "You";
-    const now = new Date();
-    const messageObj = {
-        text: msg,
-        sender: currentUser,
-        date: now.toLocaleDateString(),
-        time: now.toLocaleTimeString()
-    };
-    db.ref("chat").push(messageObj);
-    document.getElementById("chatInput").value = "";
+  const nickname = localStorage.getItem("chatUser") || "Unknown";
+  const messageObj = { 
+    text: msg, 
+    time: new Date().toLocaleTimeString(), 
+    sender: nickname 
+  };
+
+  db.ref("chat").push(messageObj);
+  document.getElementById("chatInput").value = "";
 }
+
     
 function logout() {
   localStorage.removeItem("chatUser");
@@ -480,6 +480,7 @@ db.ref("chat").on("value", snapshot => {
 
 </body>
 </html>
+
 
 
 
