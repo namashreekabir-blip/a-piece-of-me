@@ -434,7 +434,11 @@ function sendMessage() {
   const msg = document.getElementById("chatInput").value;
   if (!msg.trim()) return;
 
-  const nickname = localStorage.getItem("chatUser") || "Unknown";
+  const nickname = localStorage.getItem("chatUser");
+  // 🔹 If user not logged in, redirect to login page
+if (!chatUser) {
+  window.location.href = "login.html";
+}
   const messageObj = { 
     text: msg, 
     time: new Date().toLocaleTimeString(), 
@@ -478,10 +482,12 @@ db.ref("chat").on("value", snapshot => {
 });
   const nickname = local
 
-  </script>
 
+  </script>
+<script src="chatReaction.js"></script>
 </body>
 </html>
+
 
 
 
