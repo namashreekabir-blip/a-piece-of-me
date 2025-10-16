@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat with Reactions</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .chat-box {
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .messages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  .message {
+    position: relative;
+    margin-bottom: 12px;
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #d0f0c0;
+    align-self: flex-start;
+  }
+  .message.right {
+    background-color: #cce5ff;
+    align-self: flex-end;
+  }
+  .reaction-btn {
+    position: absolute;
+    top: 2px;
+    right: -20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: none;
+  }
+  .message:hover .reaction-btn {
+    display: block;
+  }
+  .emoji-popup {
+    display: none;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    padding: 5px 10px;
+    font-size: 20px;
+  }
+  .emoji-popup span {
+    cursor: pointer;
+    margin: 3px;
+  }
+  .reaction {
+    margin-top: 5px;
+    font-size: 18px;
+  }
+  .input-area {
+    display: flex;
+    padding: 10px;
+    background: #eee;
+  }
+  input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  button {
+    margin-left: 5px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="chat-box">
+  <div class="messages" id="messages"></div>
+
+  <div class="input-area">
+    <input type="text" id="chatInput" placeholder="Type message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<div id="emojiPopup" class="emoji-popup">
+  <span onclick="addReaction('❤️')">❤️</span>
+  <span onclick="addReaction('😂')">😂</span>
+  <span onclick="addReaction('👍')">👍</span>
+  <span onclick="addReaction('🔥')">🔥</span>
+  <span onclick="addReaction('😢')">😢</span>
+</div>
+
+<script>
+let selectedMessage = null;
+
+function sendMessage() {
+  const msg = document.getElementById("chatInput").value.trim();
+  if (!msg) return;
+
+  const messageDiv = document.createElement("div");
+  messageDiv.className = "message right";
+  messageDiv.innerHTML = `
+    <p>${msg}</p>
+    <span class="reaction-btn" onclick="showReactions(event, this)">😊</span>
+    <div class="reaction"></div>
+  `;
+
+  document.getElementById("messages").appendChild(messageDiv);
+  document.getElementById("chatInput").value = "";
+  document.getElementById("messages").scrollTop = document.getElementById("messages").scrollHeight;
+}
+
+function showReactions(event, el) {
+  event.stopPropagation();
+  selectedMessage = el.parentElement;
+  const popup = document.getElementById("emojiPopup");
+  const rect = el.getBoundingClientRect();
+
+  popup.style.display = "block";
+  popup.style.top = rect.top - 50 + "px";
+  popup.style.left = rect.left - 20 + "px";
+}
+
+function addReaction(emoji) {
+  if (selectedMessage) {
+    selectedMessage.querySelector(".reaction").innerHTML = emoji;
+  }
+  document.getElementById("emojiPopup").style.display = "none";
+}
+
+document.addEventListener("click", () => {
+  document.getElementById("emojiPopup").style.display = "none";
+});
+</script>
+
+</body>
+</html>
