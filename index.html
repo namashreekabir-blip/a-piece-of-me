@@ -436,12 +436,16 @@ function sendMessage() {
 
   const nickname = localStorage.getItem("chatUser");
   // 🔹 If user not logged in, redirect to login page
-if (!chatUser) {
-  window.location.href = "login.html";
-}
+  if (!nickname) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const now = new Date();
   const messageObj = { 
     text: msg, 
-    time: new Date().toLocaleTimeString(), 
+    time: now.toLocaleTimeString(), 
+    date: now.toLocaleDateString(), // include date
     sender: nickname 
   };
 
@@ -487,6 +491,7 @@ db.ref("chat").on("value", snapshot => {
 <script src="chatReaction.js"></script>
 </body>
 </html>
+
 
 
 
