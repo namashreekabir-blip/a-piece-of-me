@@ -507,17 +507,16 @@ db.ref("chat").on("value", snapshot => {
     <button class="reaction">😮</button>
   `;
   
-  messageDiv.appendChild(reactionBox);
-
-  // Handle reaction click
-  reactionBox.querySelectorAll('.reaction').forEach(btn => {
-    btn.addEventListener('click', () => {
-      alert('You reacted with ' + btn.textContent);
-      reactionBox.remove();
+    div.addEventListener("click", () => {
+      const emoji = prompt("React with ❤️ 😂 😢 😡 👍 👎");
+      if (emoji) div.innerHTML += ` <span>${emoji}</span>`;
     });
-  });
-});
 
+    chatBox.appendChild(div);
+  });
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+});
 
 
 
@@ -525,6 +524,7 @@ db.ref("chat").on("value", snapshot => {
 <script src="chatReaction.js"></script>
 </body>
 </html>
+
 
 
 
