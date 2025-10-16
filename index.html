@@ -290,6 +290,20 @@
   padding: 8px 12px;
   max-width: 70%;
 }
+    .reaction-box {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 8px;
+}
+.reaction {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
     
   </style>
 </head>
@@ -479,16 +493,31 @@ db.ref("chat").on("value", snapshot => {
     }
 
     // ✅ Reaction Feature — click on a message to react
-    div.addEventListener("click", () => {
-      const emoji = prompt("React with ❤️ 😂 😢 😡 👍 👎");
-      if (emoji) div.innerHTML += ` <span>${emoji}</span>`;
+   messageDiv.addEventListener('click', () => {
+  // Remove any existing reaction boxes
+  document.querySelectorAll('.reaction-box').forEach(box => box.remove());
+
+  // Create reaction box
+  const reactionBox = document.createElement('div');
+  reactionBox.className = 'reaction-box';
+  reactionBox.innerHTML = `
+    <button class="reaction">❤️</button>
+    <button class="reaction">😂</button>
+    <button class="reaction">👍</button>
+    <button class="reaction">😮</button>
+  `;
+  
+  messageDiv.appendChild(reactionBox);
+
+  // Handle reaction click
+  reactionBox.querySelectorAll('.reaction').forEach(btn => {
+    btn.addEventListener('click', () => {
+      alert('You reacted with ' + btn.textContent);
+      reactionBox.remove();
     });
-
-    chatBox.appendChild(div);
   });
-
-  chatBox.scrollTop = chatBox.scrollHeight;
 });
+
 
 
 
@@ -496,6 +525,7 @@ db.ref("chat").on("value", snapshot => {
 <script src="chatReaction.js"></script>
 </body>
 </html>
+
 
 
 
