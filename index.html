@@ -290,20 +290,6 @@
   padding: 8px 12px;
   max-width: 70%;
 }
-    .reaction-box {
-  display: flex;
-  gap: 8px;
-  margin-top: 4px;
-  background: #f0f0f0;
-  padding: 4px;
-  border-radius: 8px;
-}
-.reaction {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-}
     
   </style>
 </head>
@@ -370,7 +356,7 @@
   <script>
     
     // Gallery
-    const images = ['just.jpg','diya.jpg','3 face.jpg','tem 1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
+    const images = ['just.jpg','diya.jpg','3 face.jpg','tem1.jpg','tem 2.jpg','heena.jpg','soft toy.jpg','cheena.jpg'];
     const gallery = document.getElementById('gallery');
     images.forEach(src => {
       const img = document.createElement('img');
@@ -430,60 +416,62 @@
     loadNotes();
 
     // Firebase Chat
-// Firebase Chat
-const firebaseConfig = {
-  apiKey: "AIzaSyDnVN3MFbB8_4hYHDbHY_OFdlG6NdZoFN4",
-  authDomain: "maybemaybenot-eaa41.firebaseapp.com",
-  databaseURL: "https://maybemaybenot-eaa41-default-rtdb.firebaseio.com/",
-  projectId: "maybemaybenot-eaa41",
-  storageBucket: "maybemaybenot-eaa41.firebasestorage.app",
-  messagingSenderId: "811933656187",
-  appId: "1:811933656187:web:e0b0f30441b61586da2ede",
-  measurementId: "G-9ELBC2WJDC"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyDnVN3MFbB8_4hYHDbHY_OFdlG6NdZoFN4",
+      authDomain: "maybemaybenot-eaa41.firebaseapp.com",
+      databaseURL: "https://maybemaybenot-eaa41-default-rtdb.firebaseio.com/",
+      projectId: "maybemaybenot-eaa41",
+      storageBucket: "maybemaybenot-eaa41.firebasestorage.app",
+      messagingSenderId: "811933656187",
+      appId: "1:811933656187:web:e0b0f30441b61586da2ede",
+      measurementId: "G-9ELBC2WJDC"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const chatBox = document.getElementById("chatBox");
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-const chatBox = document.getElementById("chatBox");
-
-// ✅ Send Message Function
 function sendMessage() {
-  const msg = document.getElementById("chatInput").value.trim();
-  if (!msg) return;
+  const msg = document.getElementById("chatInput").value;
+  if (!msg.trim()) return;
 
   const nickname = localStorage.getItem("chatUser");
+  // 🔹 If user not logged in, redirect to login page
   if (!nickname) {
     window.location.href = "login.html";
     return;
   }
 
-  const messageObj = {
-    text: msg,
-    date: new Date().toLocaleDateString(),
-    time: new Date().toLocaleTimeString(),
-    sender: nickname
+  const now = new Date();
+  const messageObj = { 
+    text: msg, 
+    time: now.toLocaleTimeString(), 
+    date: now.toLocaleDateString(), // include date
+    sender: nickname 
   };
 
   db.ref("chat").push(messageObj);
   document.getElementById("chatInput").value = "";
 }
 
-// ✅ Logout Function
+    
 function logout() {
   localStorage.removeItem("chatUser");
   window.location.href = "login.html";
 }
 
-// ✅ Realtime Message Display + Reaction Support
+
+// Load Messages Realtime with sender side + date
 db.ref("chat").on("value", snapshot => {
   chatBox.innerHTML = "";
-  const currentUser = localStorage.getItem("chatUser");
-
   snapshot.forEach(snap => {
     const m = snap.val();
     const div = document.createElement("div");
+
+    // Identify the current user
+    const currentUser = localStorage.getItem("chatUser") || "You";
     const sender = m.sender || "Unknown";
 
+    // Assign class based on sender
     if (sender === currentUser) {
       div.className = "message my-message";
       div.innerHTML = `<p>${m.text}</p><div class="time">${m.date} | ${m.time}</div>`;
@@ -492,72 +480,14 @@ db.ref("chat").on("value", snapshot => {
       div.innerHTML = `<p>${m.text}</p><div class="time">${sender} • ${m.date} | ${m.time}</div>`;
     }
 
-    // ✅ Reaction Feature — click on a message to react
-   messageDiv.addEventListener('click', () => {
-  // Remove any existing reaction boxes
-  document.querySelectorAll('.reaction-box').forEach(box => box.remove());
-
-  // Create reaction box
-  const reactionBox = document.createElement('div');
-  reactionBox.className = 'reaction-box';
-  reactionBox.innerHTML = `
-    <button class="reaction">❤️</button>
-    <button class="reaction">😂</button>
-    <button class="reaction">👍</button>
-    <button class="reaction">😮</button>
-  `;
-  
-    div.addEventListener("click", () => {
-      const emoji = prompt("React with ❤️ 😂 😢 😡 👍 👎");
-      if (emoji) div.innerHTML += ` <span>${emoji}</span>`;
-    });
-
     chatBox.appendChild(div);
   });
-
   chatBox.scrollTop = chatBox.scrollHeight;
 });
-
+  const nickname = local
 
 
   </script>
 <script src="chatReaction.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
