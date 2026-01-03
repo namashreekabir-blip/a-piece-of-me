@@ -23,7 +23,9 @@
       flex-direction: column;
       align-items: center;
       animation: backgroundShift 20s infinite alternate;
+      
     }
+
     @keyframes backgroundShift {
       0% {background: linear-gradient(135deg, #fceabb, #f8b500);}
       50% {background: linear-gradient(135deg, #a1c4fd, #c2e9fb);}
@@ -418,12 +420,85 @@
         background-color: #f0f0f0;
         transform: scale(1.05);
     }
+   .heart {
+  position: fixed;
+  color: blue;
+  font-size: 20px;
+  animation: fall 4s linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10%); opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+.celebrate{
+ color: blue;
+}
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-card {
+  background: #fff0f5;
+  padding: 30px;
+  width: 90%;
+  max-width: 360px;
+  border-radius: 18px;
+  text-align: center;
+  animation: popIn 0.6s ease-out;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.popup-card h2 {
+  color: #ff4081;
+  margin-bottom: 10px;
+}
+
+.popup-card p {
+  color: #444;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.popup-card button {
+  margin-top: 20px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #ff4081;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
     
   </style>
 </head>
 <body>
 <h1>Welcome to the world between words✨</h1>
   <p class="subtitle">Every color, every moment, a story to tell 💖</p>
+ <h1 id="typeText" class="celebrate"></h1>
+
 
 
   <div class="container">
@@ -440,7 +515,7 @@
 
     <div class="block">
       <h2>🎵 Song</h2>
-      <iframe src="https://www.youtube.com/embed/TrPvQvbp3Cg" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://youtu.be/P7JyrhGnjhg" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <div class="block">
@@ -491,6 +566,19 @@
     </div>
 </div>
 
+<div id="popupCard" class="popup-overlay">
+  <div class="popup-card">
+    <h2>Still Here 🌷</h2>
+    <p>
+      It’s been 3 months.<br>
+      We’re still unsure,<br>
+      still talking every day,<br>
+      still choosing presence<br>
+     Just being here, as it is 💫
+    </p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
 
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
@@ -507,7 +595,7 @@
       gallery.appendChild(img);
     });
     
-    const blueImages = ['bajari.jpeg','chapti.avif','jwar.jpeg','book.jpg'];
+    const blueImages = ['.jpeg','.avif','.jpeg','book.jpg'];
     const blueGallery = document.getElementById('blueGallery');
     const blueTitle = document.getElementById('blueTitle');
     const blueDesc = document.getElementById('blueDesc');
@@ -858,11 +946,50 @@
         closeReactionMenu();
     }
     // --- END REACTION FUNCTIONS ---
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
 
+    setTimeout(() => {
+      heart.remove();
+    }, 4000);
+  }
+
+  setInterval(createHeart, 400);
+/*It’s been 3 months —   Still Figuring It Out, Together*/
+const text = "Its been 3 months | still present, letting it be 🌷✨";
+let index = 0;
+
+function typeEffect() {
+  if (index < text.length) {
+    document.getElementById("typeText").innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeEffect, 200);
+  }
+}
+
+typeEffect();
+
+function closePopup() {
+  document.getElementById("popupCard").style.display = "none";
+}
+
+setTimeout(() => {
+  document.getElementById("popupCard").style.display = "flex";
+}, 1500); // appears after 1.5 seconds
+  
   </script>
 <script src="chatReaction.js"></script>
 </body>
 </html>
+
+
+
+
+
 
 
 
